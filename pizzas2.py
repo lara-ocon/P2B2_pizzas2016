@@ -69,23 +69,20 @@ def transform_order_details(df_order_details):
     print("\nNumero de NaN por columnas = ", df_order_details.isna().sum()) # isnull tambien vale
     # con : df.isnull().sum(axis=1) vemos nulls por filas, axis=0 nulls por columnas
 
-    # quitamos los nans
-    df_order_details = df_order_details.dropna()
-    df_order_details.reset_index(inplace=True, drop=True)
-
-
-
     # ahora cambiamos los one/One por unos y quitamos los numeros negativos
     # tambien cambiamos @ por a , - por _, 0 por o, " " por _ y 3 por e
     for i in range(len(df_order_details)):
         pizza_id = df_order_details.loc[i, 'pizza_id']
         cantidad = df_order_details.loc[i, 'quantity']
-    
-        pizza_id = re.sub(" ", "_", pizza_id)
-        pizza_id = re.sub("@", "a", pizza_id)
-        pizza_id = re.sub("-", "_", pizza_id)
-        pizza_id = re.sub("0", "o", pizza_id)
-        pizza_id = re.sub("3", "e", pizza_id)
+        try:
+            pizza_id = re.sub(" ", "_", pizza_id)
+            pizza_id = re.sub("@", "a", pizza_id)
+            pizza_id = re.sub("-", "_", pizza_id)
+            pizza_id = re.sub("0", "o", pizza_id)
+            pizza_id = re.sub("3", "e", pizza_id)
+        except:
+            # esto es el caso de que sean Nan
+            ... 
         
         try:
             cantidad = int(cantidad)
@@ -98,15 +95,21 @@ def transform_order_details(df_order_details):
                 cantidad = 1
             elif cantidad in ["two", "Two"]:
                 cantidad = 2
-            
+                
         df_order_details.loc[i, 'pizza_id'] = pizza_id
         df_order_details.loc[i, 'quantity'] = cantidad
+
+    # cambiamos los Nans de cuantity por la media
+    df_order_details['quantity'] = df_order_details['quantity'].fillna(value=int(df_order_details['quantity'].mean()))
+    # quitamos todos los nans sobrantes (columna de pizzas)
+    df_order_details = df_order_details.dropna()
+    df_order_details.reset_index(inplace=True, drop=True)
 
     # ordenamos por order_id
     df_order_details = df_order_details.sort_values('order_id')
     # volvemos a poner los index
     df_order_details.reset_index(inplace=True, drop=True)
-    print(df_order_details.head(20))
+    print(df_order_details.head(40))
     return df_order_details
 
 
@@ -128,5 +131,5 @@ if __name__ == "__main__":
 
     df_order_dates = extract("orders.csv")
     df_order_details = extract("order_details.csv")
-    df_order_dates = transform_order_dates(df_order_dates)
+    # df_order_dates = transform_order_dates(df_order_dates)
     df_order_details = transform_order_details(df_order_details)

@@ -10,7 +10,7 @@ def create_report(dict):
     si hay datos nulos, si hay datos duplicados, si hay datos que no corresponden a 
     los valores esperados, etc.
     """
-    informe = open('informe_calidad_datos.md', 'w')
+    informe = open('informe_calidad/informe_calidad_datos.md', 'w')
     for csv in dict:
         print("\n"+"\033[1;32m"+"Creando informe de calidad de los datos del fichero "+csv+" ..."+"\033[0;m"+"\n")
         informe.write(f'\n## Informe de calidad de los datos del fichero {csv}' )

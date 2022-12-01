@@ -111,9 +111,9 @@ def cargar_predicciones(df_prediccion):
 if __name__ == "__main__":
 
     # 1) cargamos los datos:
-    df_order_dates = extract("orders.csv")
-    df_order_details = extract("order_details.csv")
-    df_pizza_types = extract_2('pizza_types.csv')
+    df_order_dates = extract("ficheros/orders.csv")
+    df_order_details = extract("ficheros/order_details.csv")
+    df_pizza_types = extract_2('ficheros/pizza_types.csv')
 
     # 2) Transformamos los datos
     df_prediccion = transform(df_pizza_types, df_order_dates, df_order_details)

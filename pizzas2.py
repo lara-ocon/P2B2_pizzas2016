@@ -104,8 +104,8 @@ def cargar_predicciones(df_prediccion):
     """
     Finalmente, solo nos queda pasar el dataframe de la prediccion, a un csv.
     """
-    df_prediccion.to_csv("predicciones.csv")
-    print("\n"+"\033[1;32m"+"Predicción cargada en un csv !!!"+"\033[0;m"+"\n")
+    df_prediccion.to_csv("ficheros/predicciones.csv")
+    print("\n"+"\033[1;32m"+"Predicción cargada en la carpeta ficheros !!!"+"\033[0;m"+"\n")
 
 
 if __name__ == "__main__":

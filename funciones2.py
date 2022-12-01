@@ -10,16 +10,7 @@ def transform_order_dates(df_order_dates):
     números mal introducidos y cambiando el formato de las fechas a datetime.
     """
 
-    # vamos a contar cuantos nan y null por columna hay
-    # vamos tambien a ver el tipo por columna
-    print("Tipos de variables por columnas = \n", df_order_dates.dtypes)
-    print("Numero de NaN por columnas = \n", df_order_dates.isna().sum()) # isnull tambien vale
-    # con : df.isnull().sum(axis=1) vemos nulls por filas, axis=0 nulls por columnas
-
-    # quitamos la columna de horas pues no nos interesa:
-    # df_order_dates = df_order_dates.drop(['time'], axis=1)
-
-    # ahora vamos a transformar las fechas, quitando aquellas que den error
+    # vamos a transformar las fechas, quitando aquellas que den error
     for i in range(len(df_order_dates)):
         try:
             df_order_dates.loc[i, 'date'] = pd.to_datetime(df_order_dates.loc[i, 'date'], dayfirst=True)
@@ -48,11 +39,6 @@ def transform_order_details(df_order_details):
     por la media (1). Con los nans restantes, elimina dichas filas.
     Por último, ordena el dataframe por order_id y resetea los index.
     """
-    # vamos a contar cuantos nan y null por columna hay
-    # vamos tambien a ver el tipo por columna
-    print("\nTipos de variables por columnas = ", df_order_details.dtypes)
-    print("\nNumero de NaN por columnas = ", df_order_details.isna().sum())
-    # con : df.isnull().sum(axis=1) vemos nulls por filas, axis=0 nulls por columnas
 
     # ahora cambiamos los one/One por unos y quitamos los numeros negativos
     # tambien cambiamos @ por a , - por _, 0 por o, " " por _ y 3 por e
@@ -260,3 +246,18 @@ def obtener_prediccion_ingredientes(df_ingredientes_semanas):
     predicciones = df_ingredientes_semanas.mean()*1.5
     df_prediccion = pd.DataFrame(data=predicciones, columns=['cantidad'])
     return df_prediccion
+
+
+def informe_calidad_datos(df, nombre):
+    """
+    Esta función nos permite obtener un informe de la calidad de los datos
+    que tenemos en nuestro dataframe. Para ello, nos muestra el número de
+    valores nulos que hay en cada columna, el número de valores únicos que
+    hay en cada columna, y el tipo de dato que hay en cada columna.
+    """
+    dict = {}
+    dict['nulos'] = df.isnull().sum()
+    dict['unicos'] = df.nunique()
+    dict['tipo'] = df.dtypes
+
+    return dict

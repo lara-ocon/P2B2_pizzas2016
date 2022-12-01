@@ -1,1 +1,4 @@
-patool
+pandas
+numpy
+datetime
+regex

@@ -246,18 +246,3 @@ def obtener_prediccion_ingredientes(df_ingredientes_semanas):
     predicciones = df_ingredientes_semanas.mean()*1.5
     df_prediccion = pd.DataFrame(data=predicciones, columns=['cantidad'])
     return df_prediccion
-
-
-def informe_calidad_datos(df, nombre):
-    """
-    Esta función nos permite obtener un informe de la calidad de los datos
-    que tenemos en nuestro dataframe. Para ello, nos muestra el número de
-    valores nulos que hay en cada columna, el número de valores únicos que
-    hay en cada columna, y el tipo de dato que hay en cada columna.
-    """
-    dict = {}
-    dict['nulos'] = df.isnull().sum()
-    dict['unicos'] = df.nunique()
-    dict['tipo'] = df.dtypes
-
-    return dict

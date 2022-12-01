@@ -1,5 +1,4 @@
 # Informe de calidad de los datos ==================================================
-import pizzas2 as p2
 import pandas as pd
 # El informe de calidad de los datos se encuentra en el fichero informe_calidad_datos.md
 

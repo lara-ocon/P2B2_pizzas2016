@@ -42,7 +42,6 @@ En resumen, estos son las reglas que vamos a aplicar para limpiar los datos:
 # importamos las librerias necesarias
 import pandas as pd
 import funciones2 as f2
-import crear_informe as ci
 
 
 # Funciones de extracción de datos =============================================

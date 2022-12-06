@@ -8,6 +8,14 @@ cargar una predicción de la cantidad de ingredientes que necesitaría la pizzer
 
 A diferencia de la práctica anterior, esta práctica contenía datos erróneos, vacíos o mal introducidos, por lo que a la hora de transformar, hemos tenido que implementar una limpieza de datos para corregir esa información.
 
+1) Opción de ejecución con Dockerfile
+
+Hay que crear el docker file con el script "createdocker.sh" y correrlo con el comando
+
+sudo docker run pizza2b2 .
+
+2) Opción de ejecución normal 
+
 Para ejecutar el programa, es necesario tener en el directorio de trabajo la carpeta ficheros (que contendrá los csv que vamos a analizar), el fichero funciones2.py (que contendrá funciones específicas para analizar cada csv y limpiar sus datos) y pizzas2.py (ETL que vamos a ejecutar). 
 
 Se puede ver como el repositorio contiene otros ficheros dentro de la carpeta crear_informe que son: "crear_informe.py" que crea un informe de calidad de datos "informe_calidad_datos.md" (se debe ejecutar fuera de esta carpeta para que pueda coger los csv dentro de la carpeta de ficheros).
